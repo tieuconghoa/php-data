@@ -65,7 +65,8 @@ class StudentsController extends BaseController
 
             $stLogic = new StudentLogic();
             $stLogic->addStudent($student,  $listStudentAction);
-            header('Location: http://localhost:8080/');
+
+            header('Location: ./');
            
         }
         $this->render('add', $data);

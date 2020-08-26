@@ -22,9 +22,9 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `action`;
 CREATE TABLE `action`  (
-  `action_id` int(11) NOT NULL DEFAULT '',
-  `capacity_id` int(11) NOT NULL DEFAULT '',
-  `action_value` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT '',
+  `action_id` int(11) NOT NULL,
+  `capacity_id` int(11) NOT NULL,
+  `action_value` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   PRIMARY KEY USING BTREE (`action_id`, `capacity_id`),
   INDEX `capacity_id` USING BTREE(`capacity_id`),
   INDEX `action_id` USING BTREE(`action_id`)
@@ -59,7 +59,7 @@ INSERT INTO `action` VALUES (19, 2, 'action 19');
 DROP TABLE IF EXISTS `capacity`;
 CREATE TABLE `capacity`  (
   `capacity_id` int(11) NOT NULL AUTO_INCREMENT,
-  `capacity_value` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT '',
+  `capacity_value` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   PRIMARY KEY USING BTREE (`capacity_id`),
   CONSTRAINT `fk_1` FOREIGN KEY (`capacity_id`) REFERENCES `action` (`action_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci COMMENT = 'InnoDB free: 4096 kB; (`capacity_id`) REFER `inout/action`(`action_id`)' ROW_FORMAT = Compact;
@@ -75,7 +75,7 @@ INSERT INTO `capacity` VALUES (2, 'nang luc giao tiep');
 -- ----------------------------
 DROP TABLE IF EXISTS `class`;
 CREATE TABLE `class`  (
-  `class_id` int(11) NOT NULL DEFAULT '',
+  `class_id` int(11) NOT NULL,
   `class_name` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY USING BTREE (`class_id`)
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
@@ -94,7 +94,7 @@ INSERT INTO `class` VALUES (4, 'DEV4');
 DROP TABLE IF EXISTS `student`;
 CREATE TABLE `student`  (
   `student_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `student_class_id` int(11) NOT NULL DEFAULT '',
+  `student_class_id` int(11) NOT NULL,
   `student_name` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `student_address` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY USING BTREE (`student_id`, `student_class_id`),
@@ -114,9 +114,9 @@ INSERT INTO `student` VALUES (3, 3, 'ASSAS', 'Hungyen');
 -- ----------------------------
 DROP TABLE IF EXISTS `student_action`;
 CREATE TABLE `student_action`  (
-  `student_id` int(11) NOT NULL DEFAULT '',
-  `action_id` int(11) NOT NULL DEFAULT '',
-  `action_point` int(1) NOT NULL DEFAULT '',
+  `student_id` int(11) NOT NULL,
+  `action_id` int(11) NOT NULL,
+  `action_point` int(1) NOT NULL,
   PRIMARY KEY USING BTREE (`student_id`, `action_id`),
   INDEX `action_id` USING BTREE(`action_id`)
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
