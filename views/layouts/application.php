@@ -10,7 +10,7 @@
 
 <body>
     <div class="nav-item">
-        <a href="/">Home</a>
+        <a href="./">Home</a>
         <a href="?controller=students&action=add">Add</a>
     </div>
     <div class="content">

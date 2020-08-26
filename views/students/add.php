@@ -35,7 +35,7 @@
                     foreach ($data['action'] as $action) {
                         if ($action->capacity_id == $capacity->capacity_id) {
                             echo '<tr>';
-                            echo '<td><label>' . $action->action_value . '</label></td>';
+                            echo '<td><label class="action-value">' . $action->action_value . '</label></td>';
                             echo '<td class="checkbox"><input type="radio" name="' . $action->action_id . '" value="1" checked required></td>
                             <td class="checkbox"><input type="radio" name="' . $action->action_id . '" value="2" ></td>
                             <td class="checkbox"><input type="radio" name="' . $action->action_id . '" value="3"></td>
