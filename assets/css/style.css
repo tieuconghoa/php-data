@@ -25,7 +25,7 @@ table td.checkbox {
     z-index: 3;
     color: #fff;
     font-size: 20px;
-    margin: 10px;
+    margin-top: 10px;
     border: 2px solid;
     transition: all 1s ease-in-out;
 }
@@ -77,7 +77,7 @@ select:focus, select:active {
 .nav-item {
     background: #ced6e0;
     height: 50px;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     box-shadow: 0px 10px 20px -13px rgba(32, 56, 117, 0.35);
     display: flex;
     flex-direction: row;
@@ -92,3 +92,23 @@ select:focus, select:active {
     color: #000;
     font-size: 20px;
 }
+.list-student-info {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+.list-student-info td, .list-student-info th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+.list-student-info tr:nth-child(even){background-color: #f2f2f2;}
+
+.list-student-info tr:hover {background-color: #ddd;}
+  
+.list-student-info th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+  } 

@@ -1,4 +1,4 @@
-<table>
+<table class="list-student-info">
     <thead>
         <tr>
             <th>Student's id</th>
