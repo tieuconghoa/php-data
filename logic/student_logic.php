@@ -22,7 +22,7 @@
 
             } catch (PDOException $e) {
                 $db->rollBack();
-                echo "Failed: " . $e->getMessage();
+                throw $e;
               }
 
         }

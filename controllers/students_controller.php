@@ -45,7 +45,7 @@ class StudentsController extends BaseController
             "student" => $studentLast,
             "classes" => $classes
         );
-        $this->render('add', $data);
+        
 
         if (isset($_POST['submit'])) {
 
@@ -65,7 +65,9 @@ class StudentsController extends BaseController
 
             $stLogic = new StudentLogic();
             $stLogic->addStudent($student,  $listStudentAction);
-
+            header('Location: http://localhost:8080/');
+           
         }
+        $this->render('add', $data);
     }
 }

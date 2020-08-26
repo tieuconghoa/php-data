@@ -48,6 +48,6 @@
                 ?>
             </tbody>
         </table>
-        <input class="btn-submit" name="submit" type="submit" value="Gửi">
+        <input class="btn-submit" name="submit" type="submit" value="Gửi" />
     </fieldset>
 </form>
