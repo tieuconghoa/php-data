@@ -5,4 +5,4 @@ create file
 - submit -> confirm -> ok
 - danh sách sv của lớp , chi tiết của hs -> ok
 - phân loại để sau -> ok
-deploy lên host
+- deploy lên host
