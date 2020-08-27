@@ -12,7 +12,12 @@
 <body>
     <div class="nav-item">
         <a href="./">Home</a>
-        <a href="?controller=students&action=add">Add</a>
+        <div class="dropdown"><a href="?controller=students&action=add" class="dropbtn">Add</a></div>
+        <div class="dropdown-content">
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
+        </div>
         <a href="?controller=classes&action=list">Class</a>
     </div>
     <div class="content">

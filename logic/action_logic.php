@@ -25,6 +25,29 @@
             }
             return $listAction;
         }
+
+        public function getLastAction() {
+            try {
+                $db = DB::getInstance();
+    
+                $mAction = new MAction($db);
+    
+                $listActions = $this->getAllAction();
+                $listActionIds = [];
+                foreach ($listActions as $action) {
+                    $listActionIds[] = $action->action_id;
+                }
+                if (!empty($listActionIds)) {
+    
+                    $lastId = (int)max($listActionIds);
+    
+                    $action = $mAction->getOne($lastId);
+                }
+            } catch (PDOException $ex) {
+                throw $ex;
+            }
+            return $action;
+        }
     }
 
 ?>
