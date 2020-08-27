@@ -3,7 +3,7 @@
 
     class CapacityLogic {
 
-        public function addAction($capacity) {
+        public function addCapacity($capacity) {
            
             try {
                 $pdo = DB::getInstance();

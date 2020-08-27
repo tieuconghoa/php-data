@@ -10,16 +10,20 @@
 </head>
 
 <body>
-    <div class="nav-item">
-        <a href="./">Home</a>
-        <div class="dropdown"><a href="?controller=students&action=add" class="dropbtn">Add</a></div>
-        <div class="dropdown-content">
-            <a href="#">Link 1</a>
-            <a href="#">Link 2</a>
-            <a href="#">Link 3</a>
-        </div>
-        <a href="?controller=classes&action=list">Class</a>
-    </div>
+    <nav role="navigation" class="primary-navigation">
+        <ul>
+            <li><a href="./">Home</a></li>
+            <li><a href="">Add &dtrif;</a>
+                <ul class="dropdown">
+                    <li><a href="?controller=students&action=add">Add Student</a></li>
+                    <li><a href="?controller=classes&action=add">Add Class</a></li>
+                    <li><a href="?controller=capacity&action=add">Add Capacity</a></li>
+                    <li><a href="?controller=action&action=add">Add Action</a></li>
+                </ul>
+            </li>
+            <li><a href="?controller=classes&action=list">Classes</a></li>
+        </ul>
+    </nav>
     <div class="content">
         <?= @$content ?>
     </div>

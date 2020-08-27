@@ -1,8 +1,8 @@
 <form action="" method="POST">
     <label class="person-label" for="fname">Action's id:</label>
-    <input class="person-input disabled" type="text" id="fname" name="class_id" readonly value="<?=$lastAction->action_id + 1 ?>"><br><br>
+    <input class="person-input disabled" type="text" id="fname" name="action_id" readonly value="<?=$lastAction->action_id + 1 ?>"><br><br>
     <label class="person-label" for="fname">Action's name:</label>
-    <input class="person-input" type="text" id="fname" name="class_name" required autofocus><br><br>
+    <input class="person-input" type="text" id="fname" name="action_value" required autofocus><br><br>
     <label class="person-label" for="fname">Capacity's name:</label>
     <select name="capacity_id">
         <?php foreach($listCapacity as $capacity) {

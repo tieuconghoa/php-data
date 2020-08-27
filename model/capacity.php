@@ -41,7 +41,7 @@
 
         public function add($capacity) {
 
-            $sql = "INSERT INTO action(capacity_value) VALUES(?)";
+            $sql = "INSERT INTO capacity(capacity_value) VALUES(?)";
 
             $req = $this->db->prepare($sql);
 
