@@ -116,6 +116,24 @@ select:focus, select:active {
     background-color: #4CAF50;
     color: white;
   }
-  .action-value {
-      margin-left: 30px;
-  }
+.action-value {
+    margin-left: 30px;
+}
+.info-student, .student-point {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+}
+.student-name, .student-id, .student-address, .student-evaluate {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+td a {
+    text-decoration: none ;
+}
+.no-data {
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+}

@@ -23,24 +23,27 @@
         } 
 
         public function add($class) {
-            $sql = "INSERT INTO class(class_name) VALUES(?)";
+            $sql = "INSERT INTO class(class_id, class_name) VALUES(?, ?)";
 
             $req =  $this->db->prepare($sql);
 
-            $req->execute([$class->class_name]);
+            $req->execute([$class->class_id, $class->class_name]);
         }
 
-        public function getNameById($id) {
-            $sql = "SELECT class_name from class WHERE class_id = ?";
+        public function getOne($id) {
+            
+            $sql = "SELECT * from class WHERE class_id = ?";
 
             $req =  $this->db->prepare($sql);
 
-            $req->execute([$id]);
+            $req->execute(array($id));
+    
+            while($item = $req->fetch()){
 
-            $nameClass = $req->fetch();
-
-            return $nameClass;
-            
+                $class = new ClassStudent($item['class_id'], $item['class_name']);
+                
+            }
+            return $class;
         }
        
     }

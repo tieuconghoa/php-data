@@ -1,4 +1,4 @@
-<form action="" method="POST">
+<form action="./?controller=students&action=addConfirm" method="POST">
     <fieldset class="person">
         <legend>Personalia:</legend>
         <label class="person-label" for="fname">Student's id:</label>
@@ -8,12 +8,12 @@
         <label class="person-label" for="lname">Student's address:</label>
         <input class="person-input" type="text" id="lname" name="student_address" required><br><br>
         <label class="person-label" for="lname">Student's class:</label>
-        <select name="student_class">
+        <select name="student_class" onchange="changeGroup(value)">
             <?php
             foreach ($data['classes'] as $class) {
                 echo "<option value='$class->class_id'>".$class->class_name."</option>";
             }
-            echo "<option>Add group</option>";
+            echo "<option value='0'>Add group</option>";
             ?>
         </select>
         <table>
@@ -49,6 +49,6 @@
                 ?>
             </tbody>
         </table>
-        <input class="btn-submit" name="submit" type="submit" value="Gửi" />
+        <input class="btn-submit" name="submit-add" type="submit" value="Gửi" />
     </fieldset>
 </form>

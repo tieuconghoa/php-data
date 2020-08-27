@@ -12,7 +12,7 @@ class DB
         define("HOSTNAME", "localhost");
         define("DBNAME", "inout"); //dbname
         define("USERNAME", "root");
-        define("PASSWORD", "");
+        define("PASSWORD", "0000");
         self::$instance = new PDO('mysql:host=' . HOSTNAME . ';dbname=' . DBNAME, USERNAME, PASSWORD);
         self::$instance->exec("SET NAMES 'utf8'");
       } catch (PDOException $ex) {

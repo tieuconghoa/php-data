@@ -63,4 +63,29 @@
             
             return $student;
         }
+
+        public function getAllStudentByClassId($id) {
+            $db = DB::getInstance();
+            $listStudents = [];
+            try {
+                $mStudent = new MStudent($db);
+                $listStudents = $mStudent->getListStudentInfoByClass($id);
+            } catch(PDOException $e) {
+                throw $e;
+            }
+            
+            return $listStudents;
+        }
+        public function getDetailStudent($id) {
+            $db = DB::getInstance();
+            $students = null;
+            try {
+                $mStudent = new MStudent($db);
+                $students = $mStudent->getDetailStudentInfo($id);
+            } catch(PDOException $e) {
+                throw $e;
+            }
+            
+            return $students;
+        }
     }

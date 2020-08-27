@@ -9,12 +9,13 @@
     </thead>
     <tbody>
         <?php
+        require_once("common/common.php");
         foreach ($students as $student) {
             echo "<tr>";
             echo "<td>" . $student->student_id . "</td>";
-            echo "<td>" . $student->student_name . "</td>";
+            echo "<td><a href='?controller=students&action=detail&id=".$student->student_id."'>" . $student->student_name . "</a></td>";
             echo "<td>" . $student->student_class_name . "</td>";
-            echo "<td>" . $student->student_point . "</td>";
+            echo "<td>" . ratings($student->student_point, 19) . "</td>";
             echo "</tr>";
         }
         ?>
