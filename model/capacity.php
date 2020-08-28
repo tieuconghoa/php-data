@@ -1,18 +1,13 @@
 <?php 
     include_once('entities/capacity.php');
-    
-    class MCapacity {
-        private $db;
+    include_once('model/base_model.php');
+    class MCapacity extends BaseModel {
 
-        public function __construct($_db)
-        {
-            $this->db = $_db;
-        }
         public function all()
         {
             $list = array();
 
-            $req = $this->db->query('SELECT * FROM capacity');
+            $req = parent::openConnection()->query('SELECT * FROM capacity');
     
             while($item = $req->fetch()){
 
@@ -27,7 +22,7 @@
     
             $sql = "SELECT * FROM action WHERE id = ?";
 
-            $req = $this->db->prepare($sql);
+            $req = parent::openConnection()->prepare($sql);
 
             $req->execute(array($id));
     
@@ -43,7 +38,7 @@
 
             $sql = "INSERT INTO capacity(capacity_value) VALUES(?)";
 
-            $req = $this->db->prepare($sql);
+            $req = parent::openConnection()->prepare($sql);
 
             $req->execute([$capacity->capacity_value]);
         }

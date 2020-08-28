@@ -6,8 +6,7 @@
         public function addAction($action) {
            
             try {
-                $pdo = DB::getInstance();
-                $mAction = new MAction($pdo);
+                $mAction = new MAction();
                 $mAction->add($action);
             } catch(PDOException $ex) {
                 throw $ex;
@@ -17,8 +16,7 @@
         public function getAllAction() {
             $listAction = [];
             try {
-                $pdo = DB::getInstance();
-                $mAction = new MAction($pdo);
+                $mAction = new MAction();
                 $listAction = $mAction->all();
             } catch(PDOException $ex) {
                 throw $ex;
@@ -27,10 +25,8 @@
         }
 
         public function getLastAction() {
-            try {
-                $db = DB::getInstance();
-    
-                $mAction = new MAction($db);
+            try {    
+                $mAction = new MAction();
     
                 $listActions = $this->getAllAction();
                 $listActionIds = [];

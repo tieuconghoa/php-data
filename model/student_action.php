@@ -1,14 +1,7 @@
 <?php 
     include_once('entities/student_action.php');
-    
-    class MStudentAction {
-
-        private $db;
-
-        public function __construct($db)
-        {
-            $this->db = $db;
-        }
+    include_once('model/base_model.php');
+    class MStudentAction extends BaseModel {
 
         public function all()
         {
@@ -16,7 +9,7 @@
             
             $sql = 'SELECT * FROM student_action';
 
-            $req =  $this->db->query($sql);
+            $req =  parent::openConnection()->query($sql);
     
             while($item = $req->fetch()){
 
@@ -29,7 +22,7 @@
         public function add($studentAction) {
 
             $sql = "INSERT INTO student_action(student_id, action_id, action_point) VALUES(?,?,?)";
-            $req = $this->db->prepare($sql);
+            $req = parent::openConnection()->prepare($sql);
             try {
                 foreach($studentAction as $item) {
                     $req->execute([$item->student_id, $item->action_id, $item->action_point]);

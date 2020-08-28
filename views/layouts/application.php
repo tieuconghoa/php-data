@@ -13,7 +13,7 @@
     <nav role="navigation" class="primary-navigation">
         <ul>
             <li><a href="./">Home</a></li>
-            <li><a href="">Add &dtrif;</a>
+            <li><span>Add &dtrif;</span>
                 <ul class="dropdown">
                     <li><a href="?controller=students&action=add">Add Student</a></li>
                     <li><a href="?controller=classes&action=add">Add Class</a></li>
@@ -24,7 +24,7 @@
             <li><a href="?controller=classes&action=list">Classes</a></li>
         </ul>
     </nav>
-    <div class="content">
+    <div>
         <?= @$content ?>
     </div>
 

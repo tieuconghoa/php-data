@@ -1,18 +1,13 @@
 <?php 
     include_once('entities/class.php');
-    
-    class MClass {
-        private $db;
+    include_once('model/base_model.php');
+    class MClass extends BaseModel {
 
-        public function __construct($_db)
-        {
-            $this->db = $_db;
-        }
         public function all()
         {
             $list = array();
     
-            $req = $this->db->query('SELECT * FROM class');
+            $req = parent::openConnection()->query('SELECT * FROM class');
     
             while($item = $req->fetch()){
 
@@ -25,7 +20,7 @@
         public function add($class) {
             $sql = "INSERT INTO class(class_id, class_name) VALUES(?, ?)";
 
-            $req =  $this->db->prepare($sql);
+            $req =  parent::openConnection()->prepare($sql);
 
             $req->execute([$class->class_id, $class->class_name]);
         }
@@ -34,7 +29,7 @@
             
             $sql = "SELECT * from class WHERE class_id = ?";
 
-            $req =  $this->db->prepare($sql);
+            $req =  parent::openConnection()->prepare($sql);
 
             $req->execute(array($id));
     

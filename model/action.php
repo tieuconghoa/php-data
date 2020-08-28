@@ -1,18 +1,14 @@
 <?php 
     include_once('entities/action.php');
+    include_once('model/base_model.php');
     
-    class MAction {
-        private $db;
-
-        public function __construct($_db)
-        {
-            $this->db = $_db;
-        }
+    class MAction extends BaseModel {
+       
         public function all()
         {
             $list = array();
     
-            $req = $this->db->query('SELECT * FROM action');
+            $req = parent::openConnection()->query('SELECT * FROM action');
     
             while($item = $req->fetch()){
 
@@ -26,7 +22,7 @@
 
             $sql = "INSERT INTO action(action_id, capacity_id, action_value) VALUES(?, ?, ?)";
 
-            $req = $this->db->prepare($sql);
+            $req = parent::openConnection()->prepare($sql);
 
             $req->execute([$action->action_id, $action->capacity_id, $action->action_value]);
         }
@@ -35,7 +31,7 @@
 
             $sql = "SELECT * FROM capacity WHERE capacity_id = ?";
 
-            $req = $this->db->prepare($sql);
+            $req = parent::openConnection()->prepare($sql);
 
             $req->execute([$capacity_id]);
 
@@ -51,7 +47,7 @@
 
             $sql = "SELECT * FROM action WHERE action_id = ?";
 
-            $req = $this->db->prepare($sql);
+            $req = parent::openConnection()->prepare($sql);
 
             $req->execute([$action_id]);
 

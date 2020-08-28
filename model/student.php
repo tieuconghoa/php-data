@@ -1,20 +1,15 @@
 <?php 
     include_once('entities/student.php');
     include_once('entities/student_info.php');
+    include_once('model/base_model.php');
     
-    class MStudent {
-        private $db;
-
-        public function __construct($_db)
-        {
-            $this->db = $_db;
-        }
+    class MStudent extends BaseModel {
 
         public function all()
         {
             $list = array();
     
-            $req = $this->db->query('SELECT * FROM student');
+            $req = parent::openConnection()->query('SELECT * FROM student');
     
             while($item = $req->fetch()){
                 $list[] = new Student($item['student_id'], $item['student_class_id'], $item['student_name'], $item['student_address']);
@@ -25,7 +20,7 @@
 
             $sql = "INSERT INTO student(student_class_id, student_name,student_address) VALUES (?, ?, ?)";
 
-            $req = $this->db->prepare($sql);
+            $req = parent::openConnection()->prepare($sql);
 
             $req->execute(array($student->student_class_id, $student->student_name, $student->student_address));
 
@@ -34,7 +29,7 @@
         {
             $student = null;
             
-            $req = $this->db->prepare('SELECT * FROM student WHERE student_id = ?');
+            $req = parent::openConnection()->prepare('SELECT * FROM student WHERE student_id = ?');
             
             $req->execute(array($id));
     
@@ -56,7 +51,7 @@
             LEFT JOIN student_action as sa ON s.student_id = sa.student_id
             GROUP BY s.student_id";
 
-            $req = $this->db->query($sql);
+            $req = parent::openConnection()->query($sql);
 
             while($item = $req->fetch()) {
                 $listStudentInfo[] = new StudentInfo($item['student_id'], $item['student_class_id'], $item['student_name'], $item['student_address'],  $item['class_name'],  $item['student_point']);
@@ -76,7 +71,7 @@
 			LEFT JOIN action as a ON a.action_id = sa.action_id
 			WHERE s.student_id = ?";
 
-            $req = $this->db->prepare($sql);
+            $req = parent::openConnection()->prepare($sql);
             $req->execute(array($id));
 
             while($item = $req->fetch()) {
@@ -107,7 +102,7 @@
             WHERE s.student_class_id = ?
             GROUP BY s.student_id";
 
-            $req = $this->db->prepare($sql);
+            $req = parent::openConnection()->prepare($sql);
             $req->execute(array($class_id));
 
             while($item = $req->fetch()) {

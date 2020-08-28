@@ -9,10 +9,10 @@ class ClassLogic
 
     public function getAllClass()
     {
-        $db = DB::getInstance();
+       
         $listClasses = [];
         try {
-            $mClass = new MClass($db);
+            $mClass = new MClass();
             $listClasses = $mClass->all();
         } catch (PDOException $e) {
             throw $e;
@@ -24,9 +24,9 @@ class ClassLogic
     {
 
         try {
-            $db = DB::getInstance();
+           
 
-            $mClass = new MClass($db);
+            $mClass = new MClass();
 
             $mClass->add($class);
         } catch (PDOException $ex) {
@@ -37,9 +37,9 @@ class ClassLogic
     public function getLastClass()
     {
         try {
-            $db = DB::getInstance();
+           
 
-            $mClass = new MClass($db);
+            $mClass = new MClass();
 
             $listClasses = $this->getAllClass();
             $listClassIds = [];
@@ -61,8 +61,8 @@ class ClassLogic
     public function getDetailClass($id)
     {
         try {
-            $db = DB::getInstance();
-            $mClass = new MClass($db);
+           
+            $mClass = new MClass();
             $class = $mClass->getOne($id);
         } catch (PDOException $ex) {
             throw $ex;

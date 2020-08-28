@@ -7,14 +7,16 @@
     class StudentLogic {
 
         public function addStudent($student, $studentAction) {
-            $db = DB::getInstance();
             try {
-
+                $mStudent = new MStudent();
+                $mStudentAction = new MStudentAction();
+                $db = $mStudent->openConnection();
+                print_r($db);
                 $db->setAttribute(PDO::ATTR_AUTOCOMMIT, 0);
                 $db->beginTransaction();
                 
-                $mStudent = new MStudent($db);
-                $mStudentAction = new MStudentAction($db);
+                $mStudentAction->setConnection($db);
+                
                 $mStudent->add($student);
                 $mStudentAction->add($studentAction);             
                 
@@ -27,10 +29,9 @@
 
         }
         public function getAllStudent() {
-            $db = DB::getInstance();
             $listStudents = [];
             try {
-                $mStudent = new MStudent($db);
+                $mStudent = new MStudent();
                 $listStudents = $mStudent->getListStudentInfo();
             } catch(PDOException $e) {
                 throw $e;
@@ -39,10 +40,9 @@
             return $listStudents;
         }
         public function getLastStudent() {
-            $db = DB::getInstance();
             $student = null;
             try {
-                $mStudent = new MStudent($db);
+                $mStudent = new MStudent();
                 $listStudents = $this->getAllStudent();
                 $listStudentIds = [];
                 foreach($listStudents as $student) {
@@ -65,10 +65,9 @@
         }
 
         public function getAllStudentByClassId($id) {
-            $db = DB::getInstance();
             $listStudents = [];
             try {
-                $mStudent = new MStudent($db);
+                $mStudent = new MStudent();
                 $listStudents = $mStudent->getListStudentInfoByClass($id);
             } catch(PDOException $e) {
                 throw $e;
@@ -77,10 +76,9 @@
             return $listStudents;
         }
         public function getDetailStudent($id) {
-            $db = DB::getInstance();
             $students = null;
             try {
-                $mStudent = new MStudent($db);
+                $mStudent = new MStudent();
                 $students = $mStudent->getDetailStudentInfo($id);
             } catch(PDOException $e) {
                 throw $e;
