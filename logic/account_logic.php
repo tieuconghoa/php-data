@@ -9,10 +9,6 @@
 
             $account = $mAccount->getUserByUsername($username, $password);
 
-            if($account > 0) {
-                return true;
-            } else {
-                return false;
-            }           
+            return $account;      
         }
     }

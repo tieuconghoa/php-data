@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once('controllers/base_controller.php');
 require_once('model/student.php');
 require_once('model/action.php');
@@ -37,7 +36,7 @@ class StudentsController extends BaseController
         $classes = $classLogic->getAllClass();
 
         if ($studentLast == null) {
-            $studentLast = new Student(0, null, null, null);
+            $studentLast = new Student(0, null, null, null, null);
         }
         $data = array(
             "action" => $actions,
@@ -61,10 +60,11 @@ class StudentsController extends BaseController
 
             $student_name = $_POST['student_name'];
             $student_address = $_POST['student_address'];
+            $student_birthday = $_POST['student_birthday'];
             $student_id = $_POST['student_id'];
             $student_class = $_POST['student_class'];
 
-            $student = new Student($student_id, $student_class, $student_name, $student_address);
+            $student = new Student($student_id, $student_class, $student_name, $student_birthday, $student_address);
 
             $listStudentActions = [];
             $listStudentAction = [];

@@ -12,7 +12,7 @@
             $req = parent::openConnection()->query('SELECT * FROM student');
     
             while($item = $req->fetch()){
-                $list[] = new Student($item['student_id'], $item['student_class_id'], $item['student_name'], $item['student_address']);
+                $list[] = new Student($item['student_id'], $item['student_class_id'], $item['student_name'], $item['student_birthday'],$item['student_address']);
             }
             return $list;
         } 
@@ -35,7 +35,7 @@
     
             while($item = $req->fetch()){
 
-                $student = new Student($item['student_id'], $item['student_class_id'], $item['student_name'], $item['student_address']);
+                $student = new Student($item['student_id'], $item['student_class_id'], $item['student_name'], $item['student_birthday'], $item['student_address']);
                 
             }
             return $student;
@@ -45,7 +45,7 @@
 
             $listStudentInfo = [];
 
-            $sql = "SELECT s.student_id, s.student_name, s.student_address, s.student_class_id, c.class_name, SUM(sa.action_point) as student_point
+            $sql = "SELECT s.student_id, s.student_name, s.student_birthday, s.student_address, s.student_class_id, c.class_name, SUM(sa.action_point) as student_point
             FROM `student` as s
             LEFT JOIN class as c ON s.student_class_id = c.class_id
             LEFT JOIN student_action as sa ON s.student_id = sa.student_id
@@ -54,7 +54,7 @@
             $req = parent::openConnection()->query($sql);
 
             while($item = $req->fetch()) {
-                $listStudentInfo[] = new StudentInfo($item['student_id'], $item['student_class_id'], $item['student_name'], $item['student_address'],  $item['class_name'],  $item['student_point']);
+                $listStudentInfo[] = new StudentInfo($item['student_id'], $item['student_class_id'], $item['student_name'], $item['student_birthday'], $item['student_address'],  $item['class_name'],  $item['student_point']);
             }
 
             return $listStudentInfo;
@@ -64,7 +64,7 @@
 
             $studentInfo = null;
 
-            $sql = "SELECT s.student_id, s.student_name, s.student_address, s.student_class_id, a.action_value, c.class_name, sa.action_point as student_point
+            $sql = "SELECT s.student_id, s.student_name, s.student_birthday, s.student_address, s.student_class_id, a.action_value, c.class_name, sa.action_point as student_point
             FROM `student` as s
             LEFT JOIN class as c ON s.student_class_id = c.class_id
             LEFT JOIN student_action as sa ON s.student_id = sa.student_id
@@ -79,13 +79,14 @@
                $student_class_id = $item['student_class_id'];
                $student_name = $item['student_name'];
                $student_address = $item['student_address'];
+               $student_birthday = $item['student_birthday'];
                $class_name = $item['class_name'];
                $listPoint[] = array(
                 $item['action_value'] =>  $item['student_point']
                );
             }
             if(isset($student_id)) {
-                $studentInfo = new StudentInfo($student_id, $student_class_id, $student_name, $student_address, $class_name, $listPoint);
+                $studentInfo = new StudentInfo($student_id, $student_class_id, $student_name, $student_birthday, $student_address, $class_name, $listPoint);
             }
            
             return $studentInfo;
@@ -95,7 +96,7 @@
 
             $listStudentInfo = [];
 
-            $sql = "SELECT s.student_id, s.student_name, s.student_address, s.student_class_id, c.class_name, SUM(sa.action_point) as student_point
+            $sql = "SELECT s.student_id, s.student_name, s.student_birthday, s.student_address, s.student_class_id, c.class_name, SUM(sa.action_point) as student_point
             FROM `student` as s
             LEFT JOIN class as c ON s.student_class_id = c.class_id
             LEFT JOIN student_action as sa ON s.student_id = sa.student_id
@@ -106,7 +107,7 @@
             $req->execute(array($class_id));
 
             while($item = $req->fetch()) {
-                $listStudentInfo[]= new StudentInfo($item['student_id'], $item['student_class_id'], $item['student_name'], $item['student_address'],  $item['class_name'],  $item['student_point']);
+                $listStudentInfo[]= new StudentInfo($item['student_id'], $item['student_class_id'], $item['student_name'], $item['student_birthday'], $item['student_address'],  $item['class_name'],  $item['student_point']);
             }
 
             return $listStudentInfo;
