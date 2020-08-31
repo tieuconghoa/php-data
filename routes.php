@@ -7,7 +7,7 @@ if(isset($_SESSION["username"])) {
     $role = json_decode($account->role, true);
     $controllers = $role;
     $controllers['account'] = ['login', 'logout'];
-    if(count($controllers['classes']) > 1) {
+    if(isset($controllers['classes'])) {
         $controllers['students'][] = 'addConfirm';
         $controllers['students'][] = 'detail';
         $controllers['classes'][]= 'detail';

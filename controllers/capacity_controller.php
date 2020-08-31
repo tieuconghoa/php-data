@@ -23,7 +23,7 @@
     
                 $capacityLogic->addCapacity($action);
                 
-                // header('Location: ./');
+                header('Location: ./');
             }
             $this->render('add', array());
         }

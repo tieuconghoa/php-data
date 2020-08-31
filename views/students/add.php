@@ -16,7 +16,6 @@
                 foreach ($data['classes'] as $class) {
                     echo "<option value='$class->class_id'>" . $class->class_name . "</option>";
                 }
-                echo "<option value='0'>Add group</option>";
                 ?>
             </select>
         </div>
