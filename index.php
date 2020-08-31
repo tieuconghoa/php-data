@@ -11,6 +11,9 @@ if (!isset($_SESSION['username'])) {
         } else {
             $action = 'index';
         }
+    } else {
+        $controller = 'students';
+        $action = 'list';
     }
 }
 
