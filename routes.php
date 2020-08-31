@@ -8,9 +8,10 @@ if(isset($_SESSION["username"])) {
     $controllers = $role;
     $controllers['account'] = ['login', 'logout'];
     if(isset($controllers['classes'])) {
-        $controllers['students'][] = 'addConfirm';
         $controllers['students'][] = 'detail';
         $controllers['classes'][]= 'detail';
+    } else {
+        $controllers['students'][] = 'addConfirm';
     }
 } else {
     $controllers = array( 'account' => ['login', 'logout']);

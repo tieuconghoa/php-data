@@ -11,11 +11,46 @@
  Target Server Version : 50045
  File Encoding         : 65001
 
- Date: 26/08/2020 17:16:14
+ Date: 31/08/2020 17:49:50
 */
 
 SET NAMES utf8;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for account
+-- ----------------------------
+DROP TABLE IF EXISTS `account`;
+CREATE TABLE `account`  (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `role` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  PRIMARY KEY USING BTREE (`id`)
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of account
+-- ----------------------------
+INSERT INTO `account` VALUES (1, 'admin', 'admin', '1');
+INSERT INTO `account` VALUES (2, 'admin1', 'admin1', '2');
+INSERT INTO `account` VALUES (3, 'tieuconghoa', '1', '1');
+
+-- ----------------------------
+-- Table structure for account_role
+-- ----------------------------
+DROP TABLE IF EXISTS `account_role`;
+CREATE TABLE `account_role`  (
+  `id` int(11) NOT NULL,
+  `role` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  PRIMARY KEY USING BTREE (`id`)
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of account_role
+-- ----------------------------
+INSERT INTO `account_role` VALUES (1, '{\"students\":[\"list\"],\"classes\":[\"list\",\"add\"],\"action\":[\"add\"],\"capacity\":[\"add\"]}');
+INSERT INTO `account_role` VALUES (2, '{\"students\":[\"add\"]}');
 
 -- ----------------------------
 -- Table structure for action
@@ -24,7 +59,7 @@ DROP TABLE IF EXISTS `action`;
 CREATE TABLE `action`  (
   `action_id` int(11) NOT NULL,
   `capacity_id` int(11) NOT NULL,
-  `action_value` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `action_value` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT '',
   PRIMARY KEY USING BTREE (`action_id`, `capacity_id`),
   INDEX `capacity_id` USING BTREE(`capacity_id`),
   INDEX `action_id` USING BTREE(`action_id`)
@@ -58,17 +93,17 @@ INSERT INTO `action` VALUES (19, 2, 'action 19');
 -- ----------------------------
 DROP TABLE IF EXISTS `capacity`;
 CREATE TABLE `capacity`  (
-  `capacity_id` int(11) NOT NULL AUTO_INCREMENT,
-  `capacity_value` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  PRIMARY KEY USING BTREE (`capacity_id`),
-  CONSTRAINT `fk_1` FOREIGN KEY (`capacity_id`) REFERENCES `action` (`action_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci COMMENT = 'InnoDB free: 4096 kB; (`capacity_id`) REFER `inout/action`(`action_id`)' ROW_FORMAT = Compact;
+  `capacity_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `capacity_value` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  PRIMARY KEY USING BTREE (`capacity_id`)
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of capacity
 -- ----------------------------
 INSERT INTO `capacity` VALUES (1, 'hoc tap tu chu');
 INSERT INTO `capacity` VALUES (2, 'nang luc giao tiep');
+INSERT INTO `capacity` VALUES (3, 'kha nang tu hoc');
 
 -- ----------------------------
 -- Table structure for class
@@ -87,6 +122,9 @@ INSERT INTO `class` VALUES (1, 'DEV1');
 INSERT INTO `class` VALUES (2, 'DEV2');
 INSERT INTO `class` VALUES (3, 'DEV3');
 INSERT INTO `class` VALUES (4, 'DEV4');
+INSERT INTO `class` VALUES (5, 'K61T');
+INSERT INTO `class` VALUES (6, 'K61CAC');
+INSERT INTO `class` VALUES (7, 'K61CAC');
 
 -- ----------------------------
 -- Table structure for student
@@ -97,25 +135,33 @@ CREATE TABLE `student`  (
   `student_class_id` int(11) NOT NULL,
   `student_name` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `student_address` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `student_birthday` date NULL DEFAULT NULL,
   PRIMARY KEY USING BTREE (`student_id`, `student_class_id`),
   INDEX `student_id` USING BTREE(`student_id`),
   INDEX `student_class_id` USING BTREE(`student_class_id`)
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of student
 -- ----------------------------
-INSERT INTO `student` VALUES (1, 1, 'hoa', 'tieu');
-INSERT INTO `student` VALUES (2, 2, 'ASSAS', 'aaa');
-INSERT INTO `student` VALUES (3, 3, 'ASSAS', 'Hungyen');
+INSERT INTO `student` VALUES (1, 3, 'Thoa Doan', 'Hungyen', '2020-08-31');
+INSERT INTO `student` VALUES (2, 2, 'Thoa Doan', 'Hungyen', '2020-08-31');
+INSERT INTO `student` VALUES (3, 3, 'ASSAS', 'aaa', '2020-08-31');
+INSERT INTO `student` VALUES (4, 1, 'aaa', 'Hungyen', '2020-08-31');
+INSERT INTO `student` VALUES (5, 3, '2020-07-30', 'Hungyen', NULL);
+INSERT INTO `student` VALUES (6, 5, 'Thoa Doan', 'Hungyen', NULL);
+INSERT INTO `student` VALUES (7, 3, 'Thoa Doan', 'aaa', NULL);
+INSERT INTO `student` VALUES (8, 3, 'Thoa Doan', 'Hungyen', '2020-08-26');
+INSERT INTO `student` VALUES (9, 3, 'Thoa Doan', 'Hungyen', '2020-08-26');
+INSERT INTO `student` VALUES (10, 4, 'Thoa Doan', 'Hungyen', '2016-02-10');
 
 -- ----------------------------
 -- Table structure for student_action
 -- ----------------------------
 DROP TABLE IF EXISTS `student_action`;
 CREATE TABLE `student_action`  (
-  `student_id` int(11) NOT NULL,
-  `action_id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL ,
+  `action_id` int(11) NOT NULL ,
   `action_point` int(1) NOT NULL,
   PRIMARY KEY USING BTREE (`student_id`, `action_id`),
   INDEX `action_id` USING BTREE(`action_id`)
@@ -128,12 +174,12 @@ INSERT INTO `student_action` VALUES (1, 1, 1);
 INSERT INTO `student_action` VALUES (1, 2, 1);
 INSERT INTO `student_action` VALUES (1, 3, 1);
 INSERT INTO `student_action` VALUES (1, 4, 1);
-INSERT INTO `student_action` VALUES (1, 5, 2);
+INSERT INTO `student_action` VALUES (1, 5, 1);
 INSERT INTO `student_action` VALUES (1, 6, 1);
 INSERT INTO `student_action` VALUES (1, 7, 1);
 INSERT INTO `student_action` VALUES (1, 8, 1);
 INSERT INTO `student_action` VALUES (1, 9, 1);
-INSERT INTO `student_action` VALUES (1, 10, 3);
+INSERT INTO `student_action` VALUES (1, 10, 1);
 INSERT INTO `student_action` VALUES (1, 11, 1);
 INSERT INTO `student_action` VALUES (1, 12, 1);
 INSERT INTO `student_action` VALUES (1, 13, 1);
@@ -143,16 +189,16 @@ INSERT INTO `student_action` VALUES (1, 16, 1);
 INSERT INTO `student_action` VALUES (1, 17, 1);
 INSERT INTO `student_action` VALUES (1, 18, 1);
 INSERT INTO `student_action` VALUES (1, 19, 1);
-INSERT INTO `student_action` VALUES (2, 1, 1);
-INSERT INTO `student_action` VALUES (2, 2, 1);
-INSERT INTO `student_action` VALUES (2, 3, 1);
-INSERT INTO `student_action` VALUES (2, 4, 1);
-INSERT INTO `student_action` VALUES (2, 5, 1);
-INSERT INTO `student_action` VALUES (2, 6, 1);
-INSERT INTO `student_action` VALUES (2, 7, 1);
-INSERT INTO `student_action` VALUES (2, 8, 1);
-INSERT INTO `student_action` VALUES (2, 9, 1);
-INSERT INTO `student_action` VALUES (2, 10, 1);
+INSERT INTO `student_action` VALUES (2, 1, 3);
+INSERT INTO `student_action` VALUES (2, 2, 3);
+INSERT INTO `student_action` VALUES (2, 3, 3);
+INSERT INTO `student_action` VALUES (2, 4, 3);
+INSERT INTO `student_action` VALUES (2, 5, 3);
+INSERT INTO `student_action` VALUES (2, 6, 3);
+INSERT INTO `student_action` VALUES (2, 7, 3);
+INSERT INTO `student_action` VALUES (2, 8, 3);
+INSERT INTO `student_action` VALUES (2, 9, 3);
+INSERT INTO `student_action` VALUES (2, 10, 3);
 INSERT INTO `student_action` VALUES (2, 11, 1);
 INSERT INTO `student_action` VALUES (2, 12, 1);
 INSERT INTO `student_action` VALUES (2, 13, 1);
@@ -162,24 +208,138 @@ INSERT INTO `student_action` VALUES (2, 16, 1);
 INSERT INTO `student_action` VALUES (2, 17, 1);
 INSERT INTO `student_action` VALUES (2, 18, 1);
 INSERT INTO `student_action` VALUES (2, 19, 1);
-INSERT INTO `student_action` VALUES (3, 1, 1);
-INSERT INTO `student_action` VALUES (3, 2, 1);
-INSERT INTO `student_action` VALUES (3, 3, 1);
-INSERT INTO `student_action` VALUES (3, 4, 1);
-INSERT INTO `student_action` VALUES (3, 5, 1);
-INSERT INTO `student_action` VALUES (3, 6, 1);
-INSERT INTO `student_action` VALUES (3, 7, 1);
-INSERT INTO `student_action` VALUES (3, 8, 1);
-INSERT INTO `student_action` VALUES (3, 9, 1);
-INSERT INTO `student_action` VALUES (3, 10, 1);
-INSERT INTO `student_action` VALUES (3, 11, 1);
-INSERT INTO `student_action` VALUES (3, 12, 1);
-INSERT INTO `student_action` VALUES (3, 13, 1);
-INSERT INTO `student_action` VALUES (3, 14, 1);
-INSERT INTO `student_action` VALUES (3, 15, 1);
-INSERT INTO `student_action` VALUES (3, 16, 1);
-INSERT INTO `student_action` VALUES (3, 17, 1);
-INSERT INTO `student_action` VALUES (3, 18, 1);
-INSERT INTO `student_action` VALUES (3, 19, 1);
+INSERT INTO `student_action` VALUES (3, 1, 5);
+INSERT INTO `student_action` VALUES (3, 2, 5);
+INSERT INTO `student_action` VALUES (3, 3, 5);
+INSERT INTO `student_action` VALUES (3, 4, 5);
+INSERT INTO `student_action` VALUES (3, 5, 5);
+INSERT INTO `student_action` VALUES (3, 6, 5);
+INSERT INTO `student_action` VALUES (3, 7, 5);
+INSERT INTO `student_action` VALUES (3, 8, 5);
+INSERT INTO `student_action` VALUES (3, 9, 5);
+INSERT INTO `student_action` VALUES (3, 10, 5);
+INSERT INTO `student_action` VALUES (3, 11, 5);
+INSERT INTO `student_action` VALUES (3, 12, 5);
+INSERT INTO `student_action` VALUES (3, 13, 5);
+INSERT INTO `student_action` VALUES (3, 14, 5);
+INSERT INTO `student_action` VALUES (3, 15, 5);
+INSERT INTO `student_action` VALUES (3, 16, 5);
+INSERT INTO `student_action` VALUES (3, 17, 5);
+INSERT INTO `student_action` VALUES (3, 18, 5);
+INSERT INTO `student_action` VALUES (3, 19, 5);
+INSERT INTO `student_action` VALUES (4, 1, 1);
+INSERT INTO `student_action` VALUES (4, 2, 1);
+INSERT INTO `student_action` VALUES (4, 3, 1);
+INSERT INTO `student_action` VALUES (4, 4, 1);
+INSERT INTO `student_action` VALUES (4, 5, 1);
+INSERT INTO `student_action` VALUES (4, 6, 1);
+INSERT INTO `student_action` VALUES (4, 7, 1);
+INSERT INTO `student_action` VALUES (4, 8, 1);
+INSERT INTO `student_action` VALUES (4, 9, 1);
+INSERT INTO `student_action` VALUES (4, 10, 1);
+INSERT INTO `student_action` VALUES (4, 11, 1);
+INSERT INTO `student_action` VALUES (4, 12, 1);
+INSERT INTO `student_action` VALUES (4, 13, 1);
+INSERT INTO `student_action` VALUES (4, 14, 1);
+INSERT INTO `student_action` VALUES (4, 15, 1);
+INSERT INTO `student_action` VALUES (4, 16, 1);
+INSERT INTO `student_action` VALUES (4, 17, 1);
+INSERT INTO `student_action` VALUES (4, 18, 1);
+INSERT INTO `student_action` VALUES (4, 19, 1);
+INSERT INTO `student_action` VALUES (5, 1, 1);
+INSERT INTO `student_action` VALUES (5, 2, 1);
+INSERT INTO `student_action` VALUES (5, 3, 1);
+INSERT INTO `student_action` VALUES (5, 4, 1);
+INSERT INTO `student_action` VALUES (5, 5, 1);
+INSERT INTO `student_action` VALUES (5, 6, 1);
+INSERT INTO `student_action` VALUES (5, 7, 1);
+INSERT INTO `student_action` VALUES (5, 8, 1);
+INSERT INTO `student_action` VALUES (5, 9, 1);
+INSERT INTO `student_action` VALUES (5, 10, 1);
+INSERT INTO `student_action` VALUES (5, 11, 1);
+INSERT INTO `student_action` VALUES (5, 12, 1);
+INSERT INTO `student_action` VALUES (5, 13, 1);
+INSERT INTO `student_action` VALUES (5, 14, 1);
+INSERT INTO `student_action` VALUES (5, 15, 1);
+INSERT INTO `student_action` VALUES (5, 16, 1);
+INSERT INTO `student_action` VALUES (5, 17, 1);
+INSERT INTO `student_action` VALUES (5, 18, 1);
+INSERT INTO `student_action` VALUES (5, 19, 1);
+INSERT INTO `student_action` VALUES (6, 1, 5);
+INSERT INTO `student_action` VALUES (6, 2, 5);
+INSERT INTO `student_action` VALUES (6, 3, 5);
+INSERT INTO `student_action` VALUES (6, 4, 5);
+INSERT INTO `student_action` VALUES (6, 5, 5);
+INSERT INTO `student_action` VALUES (6, 6, 5);
+INSERT INTO `student_action` VALUES (6, 7, 5);
+INSERT INTO `student_action` VALUES (6, 8, 5);
+INSERT INTO `student_action` VALUES (6, 9, 5);
+INSERT INTO `student_action` VALUES (6, 10, 5);
+INSERT INTO `student_action` VALUES (6, 11, 5);
+INSERT INTO `student_action` VALUES (6, 12, 5);
+INSERT INTO `student_action` VALUES (6, 13, 5);
+INSERT INTO `student_action` VALUES (6, 14, 5);
+INSERT INTO `student_action` VALUES (6, 15, 5);
+INSERT INTO `student_action` VALUES (6, 16, 5);
+INSERT INTO `student_action` VALUES (6, 17, 5);
+INSERT INTO `student_action` VALUES (6, 18, 5);
+INSERT INTO `student_action` VALUES (6, 19, 5);
+INSERT INTO `student_action` VALUES (7, 1, 1);
+INSERT INTO `student_action` VALUES (7, 2, 1);
+INSERT INTO `student_action` VALUES (7, 3, 1);
+INSERT INTO `student_action` VALUES (7, 4, 1);
+INSERT INTO `student_action` VALUES (7, 5, 1);
+INSERT INTO `student_action` VALUES (7, 6, 1);
+INSERT INTO `student_action` VALUES (7, 7, 1);
+INSERT INTO `student_action` VALUES (7, 8, 1);
+INSERT INTO `student_action` VALUES (7, 9, 1);
+INSERT INTO `student_action` VALUES (7, 10, 1);
+INSERT INTO `student_action` VALUES (7, 11, 1);
+INSERT INTO `student_action` VALUES (7, 12, 1);
+INSERT INTO `student_action` VALUES (7, 13, 1);
+INSERT INTO `student_action` VALUES (7, 14, 1);
+INSERT INTO `student_action` VALUES (7, 15, 1);
+INSERT INTO `student_action` VALUES (7, 16, 1);
+INSERT INTO `student_action` VALUES (7, 17, 1);
+INSERT INTO `student_action` VALUES (7, 18, 1);
+INSERT INTO `student_action` VALUES (7, 19, 1);
+INSERT INTO `student_action` VALUES (8, 1, 1);
+INSERT INTO `student_action` VALUES (8, 2, 1);
+INSERT INTO `student_action` VALUES (8, 3, 1);
+INSERT INTO `student_action` VALUES (8, 4, 1);
+INSERT INTO `student_action` VALUES (8, 5, 1);
+INSERT INTO `student_action` VALUES (8, 6, 1);
+INSERT INTO `student_action` VALUES (8, 7, 1);
+INSERT INTO `student_action` VALUES (8, 8, 1);
+INSERT INTO `student_action` VALUES (8, 9, 1);
+INSERT INTO `student_action` VALUES (8, 10, 1);
+INSERT INTO `student_action` VALUES (8, 11, 1);
+INSERT INTO `student_action` VALUES (8, 12, 1);
+INSERT INTO `student_action` VALUES (8, 13, 1);
+INSERT INTO `student_action` VALUES (8, 14, 1);
+INSERT INTO `student_action` VALUES (8, 15, 1);
+INSERT INTO `student_action` VALUES (8, 16, 1);
+INSERT INTO `student_action` VALUES (8, 17, 1);
+INSERT INTO `student_action` VALUES (8, 18, 1);
+INSERT INTO `student_action` VALUES (8, 19, 1);
+INSERT INTO `student_action` VALUES (10, 1, 1);
+INSERT INTO `student_action` VALUES (10, 2, 1);
+INSERT INTO `student_action` VALUES (10, 3, 1);
+INSERT INTO `student_action` VALUES (10, 4, 1);
+INSERT INTO `student_action` VALUES (10, 5, 1);
+INSERT INTO `student_action` VALUES (10, 6, 1);
+INSERT INTO `student_action` VALUES (10, 7, 1);
+INSERT INTO `student_action` VALUES (10, 8, 1);
+INSERT INTO `student_action` VALUES (10, 9, 1);
+INSERT INTO `student_action` VALUES (10, 10, 1);
+INSERT INTO `student_action` VALUES (10, 11, 1);
+INSERT INTO `student_action` VALUES (10, 12, 1);
+INSERT INTO `student_action` VALUES (10, 13, 1);
+INSERT INTO `student_action` VALUES (10, 14, 1);
+INSERT INTO `student_action` VALUES (10, 15, 1);
+INSERT INTO `student_action` VALUES (10, 16, 1);
+INSERT INTO `student_action` VALUES (10, 17, 1);
+INSERT INTO `student_action` VALUES (10, 18, 1);
+INSERT INTO `student_action` VALUES (10, 19, 1);
 
 SET FOREIGN_KEY_CHECKS = 1;
