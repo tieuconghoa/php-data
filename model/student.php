@@ -18,11 +18,11 @@
         } 
         public function add($student) {
 
-            $sql = "INSERT INTO student(student_class_id, student_name,student_address) VALUES (?, ?, ?)";
+            $sql = "INSERT INTO student(student_class_id, student_name, student_birthday, student_address) VALUES (?, ?, ?, ?)";
 
             $req = parent::openConnection()->prepare($sql);
 
-            $req->execute(array($student->student_class_id, $student->student_name, $student->student_address));
+            $req->execute(array($student->student_class_id, $student->student_name, $student->student_birthday, $student->student_address));
 
         }
         public function getOne($id)

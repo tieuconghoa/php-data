@@ -1,6 +1,6 @@
 <?php 
     require_once('model/base_model.php');
-    require('entities/account.php');
+    require_once('entities/account.php');
     
     class MAccount extends BaseModel {
 

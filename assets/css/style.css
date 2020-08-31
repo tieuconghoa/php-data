@@ -23,7 +23,7 @@ table .capacity {
     margin-left: 10px;
 }
 
-table td.checkbox {
+table td.radio-btn {
     text-align: center;
     vertical-align: middle;
 }
@@ -38,13 +38,13 @@ table td.checkbox {
 }
 
 .btn-submit {
-    width: 120px;
-    height: 40px;
+    width: 100px;
+    height: 30px;
     background: #2c0055;
     border-radius: 2px;
     z-index: 3;
     color: #fff;
-    font-size: 20px;
+    font-size: 16px;
     margin-top: 10px;
     border: 1px solid #ced6e0;
     transition: all 1s ease-in-out;
@@ -68,8 +68,6 @@ table td.checkbox {
 }
 
 .person-input {
-    height: 50px;
-    width: 400px;
     border-radius: 5px;
     border: 1px solid #ced6e0;
     transition: all 0.3s ease-in-out;
@@ -97,10 +95,13 @@ person-input:active {
     background: #ced6e0;
 }
 
+.th-class {
+    text-align: center;
+}
+
 select {
-    height: 50px;
-    width: 400px;
-    margin-bottom: 20px;
+    height: 32px;
+    margin-bottom: 20px !important;
     border-radius: 5px;
     border: 1px solid #ced6e0;
     transition: all 0.3s ease-in-out;
@@ -242,9 +243,11 @@ nav.primary-navigation ul li ul li a:hover {
     border-left: 2px solid #3ca0e7;
     transition: all 0.3s ease;
 }
+
 .dropdown {
     z-index: 10;
 }
+
 a {
     text-decoration: none;
 }
@@ -460,24 +463,24 @@ ul li ul li a {
     top: 46%;
     left: 75%;
 }
+
 .navbar-global {
     background-color: indigo;
-  }
-  
-  .navbar-global .navbar-brand {
+}
+
+.navbar-global .navbar-brand {
     color: white;
-  }
-  
-  .navbar-global .navbar-user > li > a
-  {
+}
+
+.navbar-global .navbar-user>li>a {
     color: white;
-  }
-  
-  .navbar-primary {
+}
+
+.navbar-primary {
     background-color: #333;
     bottom: 0px;
     left: 0px;
-    position: absolute;
+    position: fixed;
     top: 51px;
     width: 200px;
     z-index: 8;
@@ -485,77 +488,78 @@ ul li ul li a {
     -webkit-transition: all 0.1s ease-in-out;
     -moz-transition: all 0.1s ease-in-out;
     transition: all 0.1s ease-in-out;
-  }
-  
-  .navbar-primary.collapsed {
+}
+
+.navbar-primary.collapsed {
     width: 60px;
-  }
-  
-  .navbar-primary.collapsed .glyphicon {
+}
+
+.navbar-primary.collapsed .glyphicon {
     font-size: 22px;
-  }
-  
-  .navbar-primary.collapsed .nav-label {
+}
+
+.navbar-primary.collapsed .nav-label {
     display: none;
-  }
-  
-  .btn-expand-collapse {
-      position: absolute;
-      display: block;
-      left: 0px;
-      bottom:0;
-      width: 100%;
-      padding: 8px 0;
-      border-top:solid 1px #666;
-      color: grey;
-      font-size: 20px;
-      text-align: center;
-  }
-  
-  .btn-expand-collapse:hover,
-  .btn-expand-collapse:focus {
-      background-color: #222;
-      color: white;
-  }
-  
-  .btn-expand-collapse:active {
-      background-color: #111;
-  }
-  
-  .navbar-primary-menu,
-  .navbar-primary-menu li {
-    margin:0; padding:0;
+}
+
+.btn-expand-collapse {
+    position: absolute;
+    display: block;
+    left: 0px;
+    bottom: 0;
+    width: 100%;
+    padding: 8px 0;
+    border-top: solid 1px #666;
+    color: grey;
+    font-size: 20px;
+    text-align: center;
+}
+
+.btn-expand-collapse:hover,
+.btn-expand-collapse:focus {
+    background-color: #222;
+    color: white;
+}
+
+.btn-expand-collapse:active {
+    background-color: #111;
+}
+
+.navbar-primary-menu,
+.navbar-primary-menu li {
+    margin: 0;
+    padding: 0;
     list-style: none;
-  }
-  
-  .navbar-primary-menu li a {
+}
+
+.navbar-primary-menu li a {
     display: block;
     padding: 10px 18px;
     text-align: left;
-    border-bottom:solid 1px #444;
+    border-bottom: solid 1px #444;
     color: #ccc;
-  }
-  
-  .navbar-primary-menu li a:hover {
+}
+
+.navbar-primary-menu li a:hover {
     background-color: #000;
     text-decoration: none;
     color: white;
-  }
-  
-  .navbar-primary-menu li a .glyphicon {
+}
+
+.navbar-primary-menu li a .glyphicon {
     margin-right: 6px;
-  }
-  
-  .navbar-primary-menu li a:hover .glyphicon {
+}
+
+.navbar-primary-menu li a:hover .glyphicon {
     color: orchid;
-  }
-  
-  .main-content {
-    margin-top: 60px;
+}
+
+.main-content {
+    margin-top: 50px;
     margin-left: 200px;
     padding: 20px;
-  }
-  
-  .collapsed + .main-content {
+}
+
+.collapsed+.main-content {
     margin-left: 60px;
-  }
+}

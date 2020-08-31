@@ -25,12 +25,12 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">name of company</a>
+                    <a class="navbar-brand" href="./">name of company</a>
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-user navbar-right">';
 
-            echo "<li><a href=><span class='glyphicon glyphicon-user'></span> " . $_SESSION['username'] . "</a></li>";
+            echo "<li><a><span class='glyphicon glyphicon-user'></span> " . $_SESSION['username'] . "</a></li>";
             echo '<li><a href="?controller=account&action=logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>';
             echo '</ul>
             </div>
@@ -38,19 +38,19 @@
     </nav>
     <nav class="navbar-primary">
         <a  class="btn-expand-collapse"><span class="glyphicon glyphicon-menu-left"></span></a>
-        <ul     class="navbar-primary-menu"><li>';
+        <ul class="navbar-primary-menu"><li>';
             $account = unserialize(serialize($_SESSION["account"]));
             $role = json_decode($account->role);
-            echo '<li>';
-                foreach($role as $key => $value) {
-                    echo '<a href="#"><span class="glyphicon glyphicon-list-alt"></span><span class="nav-label">' .$key.'</span></a>';
-                    echo '<ul id="submenu-1" class="collapse">';
-                    foreach($value as $item) {
-                        echo '<li><a href="#"><i class="fa fa-angle-double-right"></i> '.$item .' '.$key.'</a></li>';
-                    }
-                    
-                echo '</ul>';
+            echo '<li class="dropdown">';
+            foreach ($role as $key => $value) {
+                echo '<a href="#"  data-toggle="collapse" data-target="#submenu-1">
+                    <span class="glyphicon glyphicon-list-alt"></span><span class="nav-label">' . $key . '</span></a>';
+                echo '<ul id="submenu-1" class="expanded">';
+                foreach ($value as $item) {
+                    echo '<li><a href="?controller=' . $key . '&action=' . $item . '"><i class="fa fa-angle-double-right"></i> ' . $item . ' ' . $key . '</a></li>';
                 }
+                echo '</ul>';
+            }
             echo '</li>
         </ul>
     </nav>';
@@ -67,6 +67,8 @@
     $('.btn-expand-collapse').click(function(e) {
         $('.glyphicon.glyphicon-menu-left').toggleClass('glyphicon-menu-right');
         $('.navbar-primary').toggleClass('collapsed');
+        $('.expanded').toggleClass('collapse');
+        // $('.collapse').attr('class', 'expand');
     });
 </script>
 

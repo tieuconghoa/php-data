@@ -1,12 +1,17 @@
 <form action="" method="POST">
     <table class="list-student-info">
         <?php
+        require_once("common/common.php");
         echo "<tr>";
         echo "<td>Student's Id </td>";
         echo "<td>" . $data['student']->student_id . "</td></tr>";
         echo "<tr>";
         echo "<td>Student's Name </td>";
         echo "<td>" . $data['student']->student_name . "</td></tr>";
+        echo "<tr>";
+        echo "<tr>";
+        echo "<td>Student's Birthday </td>";
+        echo "<td>" . formatDateTime($data['student']->student_birthday,'d-m-Y') . "</td></tr>";
         echo "<tr>";
         echo "<td>Student's Address </td>";
         echo "<td>" . $data['student']->student_address . "</td></tr>";

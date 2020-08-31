@@ -87,13 +87,13 @@ class StudentsController extends BaseController
                 "listStudentAction" => $listStudentAction,
                 "className" => $className
             );
-
-
             $this->render('addConfirm', $data);
         } else {
             if (isset($_POST['submit'])  && $_POST['submit'] == "Xác nhận") {
                 $data =  unserialize (serialize ($_SESSION["data"]));
                 $stLogic->addStudent($data['student'],  $data['listStudentAction']);
+                header('Location: ./');
+            } else {
                 header('Location: ./');
             }
         }

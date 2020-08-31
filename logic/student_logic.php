@@ -11,7 +11,6 @@
                 $mStudent = new MStudent();
                 $mStudentAction = new MStudentAction();
                 $db = $mStudent->openConnection();
-                print_r($db);
                 $db->setAttribute(PDO::ATTR_AUTOCOMMIT, 0);
                 $db->beginTransaction();
                 

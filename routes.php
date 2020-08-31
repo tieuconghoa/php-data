@@ -1,17 +1,32 @@
 <?php
-$controllers = array(
-    'students' => ['list', 'add', 'addConfirm', 'detail'],
-    'classes' => ['list', 'add', 'detail'],
-    'action' => ['list', 'add', 'edit'],
-    'capacity' => ['add', 'edit'],
-    'account' => ['login', 'logout']
-); // Các controllers trong hệ thống và các action có thể gọi ra từ controller đó.
-
+require_once('entities/account.php');
+$controllers = array( 'account' => ['login', 'logout']);
+//  Các controllers trong hệ thống và các action có thể gọi ra từ controller đó.
+if(isset($_SESSION["username"])) {
+    $account = unserialize(serialize($_SESSION["account"]));
+    $role = json_decode($account->role, true);
+    $controllers = $role;
+    $controllers['account'] = ['login', 'logout'];
+    if(count($controllers['classes']) > 1) {
+        $controllers['students'][] = 'addConfirm';
+        $controllers['students'][] = 'detail';
+        $controllers['classes'][]= 'detail';
+    }
+} else {
+    $controllers = array( 'account' => ['login', 'logout']);
+}
+// $controllers = array(
+//     'students' => ['list', 'add', 'addConfirm', 'detail'],
+//     'classes' => ['list', 'add', 'detail'],
+//     'action' => ['list', 'add', 'edit'],
+//     'capacity' => ['add', 'edit'],
+//    
+// );
 // Nếu các tham số nhận được từ URL không hợp lệ (không thuộc list controller và action có thể gọi
 // thì trang báo lỗi sẽ được gọi ra.
 if (!array_key_exists($controller, $controllers) || !in_array($action, $controllers[$controller])) {
-    $controller = 'students';
-    $action = 'list';
+    $controller = array_keys($controllers)[0];
+    $action = array_values($controllers)[0][0];
 }
 
 // Nhúng file định nghĩa controller vào để có thể dùng được class định nghĩa trong file đó
