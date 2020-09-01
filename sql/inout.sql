@@ -23,9 +23,9 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `account`;
 CREATE TABLE `account`  (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `username` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `password` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `role` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `username` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `role` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
   PRIMARY KEY USING BTREE (`id`)
 ) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Compact;
 
@@ -41,8 +41,8 @@ INSERT INTO `account` VALUES (3, 'tieuconghoa', '1', '1');
 -- ----------------------------
 DROP TABLE IF EXISTS `account_role`;
 CREATE TABLE `account_role`  (
-  `id` int(11) NOT NULL DEFAULT '',
-  `role` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `id` int(11) NOT NULL,
+  `role` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
   PRIMARY KEY USING BTREE (`id`)
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Compact;
 
@@ -57,9 +57,9 @@ INSERT INTO `account_role` VALUES (2, '{\"students\":[\"add\"]}');
 -- ----------------------------
 DROP TABLE IF EXISTS `action`;
 CREATE TABLE `action`  (
-  `action_id` int(11) NOT NULL DEFAULT '',
-  `capacity_component_id` int(11) NOT NULL DEFAULT '',
-  `action_value` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT '',
+  `action_id` int(11) NOT NULL,
+  `capacity_component_id` int(11) NOT NULL,
+  `action_value` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY USING BTREE (`action_id`, `capacity_component_id`),
   INDEX `capacity_id` USING BTREE(`capacity_component_id`),
   INDEX `action_id` USING BTREE(`action_id`)
@@ -94,7 +94,7 @@ INSERT INTO `action` VALUES (19, 2, 'action 19');
 DROP TABLE IF EXISTS `capacity`;
 CREATE TABLE `capacity`  (
   `capacity_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `capacity_value` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `capacity_value` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
   PRIMARY KEY USING BTREE (`capacity_id`)
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Compact;
 
@@ -109,9 +109,9 @@ INSERT INTO `capacity` VALUES (2, 'nang luc giao tiep');
 -- ----------------------------
 DROP TABLE IF EXISTS `capacity_component`;
 CREATE TABLE `capacity_component`  (
-  `id` int(11) NOT NULL DEFAULT '' AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `capacity_id` int(11) NULL DEFAULT NULL,
-  `capacity_component_value` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `capacity_component_value` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
   PRIMARY KEY USING BTREE (`id`)
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Compact;
 
@@ -126,8 +126,8 @@ INSERT INTO `capacity_component` VALUES (2, 1, 'danh gia ban than');
 -- ----------------------------
 DROP TABLE IF EXISTS `class`;
 CREATE TABLE `class`  (
-  `class_id` int(11) NOT NULL DEFAULT '',
-  `class_name` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `class_id` int(11) NOT NULL,
+  `class_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
   PRIMARY KEY USING BTREE (`class_id`)
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Compact;
 
@@ -148,9 +148,9 @@ INSERT INTO `class` VALUES (7, 'K61CAC');
 DROP TABLE IF EXISTS `student`;
 CREATE TABLE `student`  (
   `student_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `student_class_id` int(11) NOT NULL DEFAULT '',
-  `student_name` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `student_address` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `student_class_id` int(11) NOT NULL,
+  `student_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
+  `student_address` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT NULL,
   `student_birthday` date NULL DEFAULT NULL,
   PRIMARY KEY USING BTREE (`student_id`, `student_class_id`),
   INDEX `student_id` USING BTREE(`student_id`),
@@ -179,9 +179,9 @@ INSERT INTO `student` VALUES (13, 3, 'Thoa Doan', 'Hungyen', '2020-09-25');
 -- ----------------------------
 DROP TABLE IF EXISTS `student_action`;
 CREATE TABLE `student_action`  (
-  `student_id` int(11) NOT NULL DEFAULT '',
-  `action_id` int(11) NOT NULL DEFAULT '',
-  `action_point` int(1) NOT NULL DEFAULT '',
+  `student_id` int(11) NOT NULL,
+  `action_id` int(11) NOT NULL,
+  `action_point` int(1) NOT NULL,
   PRIMARY KEY USING BTREE (`student_id`, `action_id`),
   INDEX `action_id` USING BTREE(`action_id`)
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Compact;
