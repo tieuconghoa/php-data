@@ -1,8 +1,5 @@
-create file
-- thêm năng lực, hành động -> ok
-- có thêm lớp -> ok
-- phân quyền: admin, gv, hs -> xử lí trong ngày 28-29/8
-- submit -> confirm -> ok
-- danh sách sv của lớp , chi tiết của hs -> ok
-- phân loại để sau -> ok
-- deploy lên host -> http://demophp.byethost7.com/
+- deploy lên host -> http://demophp.byethost7.com
+- code trên mô hình mvc chủ yếu sử dụng php
+- ngoài ra còn sử dụng html, css, để dựng giao diện
+- file dump sql  có trong thư mục sql, file inout.php
+- mô tả DB [Xem ảnh](https://www.upsieutoc.com/images/2020/09/01/Capture9d267c2032c87f96.png)
