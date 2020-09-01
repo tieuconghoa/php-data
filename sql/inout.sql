@@ -11,7 +11,7 @@
  Target Server Version : 50045
  File Encoding         : 65001
 
- Date: 31/08/2020 17:49:50
+ Date: 01/09/2020 10:12:02
 */
 
 SET NAMES utf8;
@@ -27,7 +27,7 @@ CREATE TABLE `account`  (
   `password` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `role` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY USING BTREE (`id`)
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of account
@@ -41,15 +41,15 @@ INSERT INTO `account` VALUES (3, 'tieuconghoa', '1', '1');
 -- ----------------------------
 DROP TABLE IF EXISTS `account_role`;
 CREATE TABLE `account_role`  (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL DEFAULT '',
   `role` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY USING BTREE (`id`)
-) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of account_role
 -- ----------------------------
-INSERT INTO `account_role` VALUES (1, '{\"students\":[\"list\"],\"classes\":[\"list\",\"add\"],\"action\":[\"add\"],\"capacity\":[\"add\"]}');
+INSERT INTO `account_role` VALUES (1, '{\"students\":[\"list\"],\"classes\":[\"list\",\"add\"],\"action\":[\"add\"],\"capacity\":[\"add\"],\"capacity_component\":[\"add\"]}');
 INSERT INTO `account_role` VALUES (2, '{\"students\":[\"add\"]}');
 
 -- ----------------------------
@@ -57,13 +57,13 @@ INSERT INTO `account_role` VALUES (2, '{\"students\":[\"add\"]}');
 -- ----------------------------
 DROP TABLE IF EXISTS `action`;
 CREATE TABLE `action`  (
-  `action_id` int(11) NOT NULL,
-  `capacity_id` int(11) NOT NULL,
+  `action_id` int(11) NOT NULL DEFAULT '',
+  `capacity_component_id` int(11) NOT NULL DEFAULT '',
   `action_value` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT '',
-  PRIMARY KEY USING BTREE (`action_id`, `capacity_id`),
-  INDEX `capacity_id` USING BTREE(`capacity_id`),
+  PRIMARY KEY USING BTREE (`action_id`, `capacity_component_id`),
+  INDEX `capacity_id` USING BTREE(`capacity_component_id`),
   INDEX `action_id` USING BTREE(`action_id`)
-) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of action
@@ -96,24 +96,40 @@ CREATE TABLE `capacity`  (
   `capacity_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `capacity_value` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY USING BTREE (`capacity_id`)
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of capacity
 -- ----------------------------
 INSERT INTO `capacity` VALUES (1, 'hoc tap tu chu');
 INSERT INTO `capacity` VALUES (2, 'nang luc giao tiep');
-INSERT INTO `capacity` VALUES (3, 'kha nang tu hoc');
+
+-- ----------------------------
+-- Table structure for capacity_component
+-- ----------------------------
+DROP TABLE IF EXISTS `capacity_component`;
+CREATE TABLE `capacity_component`  (
+  `id` int(11) NOT NULL DEFAULT '' AUTO_INCREMENT,
+  `capacity_id` int(11) NULL DEFAULT NULL,
+  `capacity_component_value` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  PRIMARY KEY USING BTREE (`id`)
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of capacity_component
+-- ----------------------------
+INSERT INTO `capacity_component` VALUES (1, 1, 'tu dat muc tieu');
+INSERT INTO `capacity_component` VALUES (2, 1, 'danh gia ban than');
 
 -- ----------------------------
 -- Table structure for class
 -- ----------------------------
 DROP TABLE IF EXISTS `class`;
 CREATE TABLE `class`  (
-  `class_id` int(11) NOT NULL,
+  `class_id` int(11) NOT NULL DEFAULT '',
   `class_name` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY USING BTREE (`class_id`)
-) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of class
@@ -132,14 +148,14 @@ INSERT INTO `class` VALUES (7, 'K61CAC');
 DROP TABLE IF EXISTS `student`;
 CREATE TABLE `student`  (
   `student_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `student_class_id` int(11) NOT NULL,
+  `student_class_id` int(11) NOT NULL DEFAULT '',
   `student_name` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `student_address` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `student_birthday` date NULL DEFAULT NULL,
   PRIMARY KEY USING BTREE (`student_id`, `student_class_id`),
   INDEX `student_id` USING BTREE(`student_id`),
   INDEX `student_class_id` USING BTREE(`student_class_id`)
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of student
@@ -154,18 +170,21 @@ INSERT INTO `student` VALUES (7, 3, 'Thoa Doan', 'aaa', NULL);
 INSERT INTO `student` VALUES (8, 3, 'Thoa Doan', 'Hungyen', '2020-08-26');
 INSERT INTO `student` VALUES (9, 3, 'Thoa Doan', 'Hungyen', '2020-08-26');
 INSERT INTO `student` VALUES (10, 4, 'Thoa Doan', 'Hungyen', '2016-02-10');
+INSERT INTO `student` VALUES (11, 5, 'Thoa Doan', 'Hungyen', '2020-07-29');
+INSERT INTO `student` VALUES (12, 5, 'hoa', 'Hai duong', '1998-03-19');
+INSERT INTO `student` VALUES (13, 3, 'Thoa Doan', 'Hungyen', '2020-09-25');
 
 -- ----------------------------
 -- Table structure for student_action
 -- ----------------------------
 DROP TABLE IF EXISTS `student_action`;
 CREATE TABLE `student_action`  (
-  `student_id` int(11) NOT NULL ,
-  `action_id` int(11) NOT NULL ,
-  `action_point` int(1) NOT NULL,
+  `student_id` int(11) NOT NULL DEFAULT '',
+  `action_id` int(11) NOT NULL DEFAULT '',
+  `action_point` int(1) NOT NULL DEFAULT '',
   PRIMARY KEY USING BTREE (`student_id`, `action_id`),
   INDEX `action_id` USING BTREE(`action_id`)
-) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of student_action
@@ -341,5 +360,62 @@ INSERT INTO `student_action` VALUES (10, 16, 1);
 INSERT INTO `student_action` VALUES (10, 17, 1);
 INSERT INTO `student_action` VALUES (10, 18, 1);
 INSERT INTO `student_action` VALUES (10, 19, 1);
+INSERT INTO `student_action` VALUES (11, 1, 1);
+INSERT INTO `student_action` VALUES (11, 2, 1);
+INSERT INTO `student_action` VALUES (11, 3, 1);
+INSERT INTO `student_action` VALUES (11, 4, 1);
+INSERT INTO `student_action` VALUES (11, 5, 1);
+INSERT INTO `student_action` VALUES (11, 6, 1);
+INSERT INTO `student_action` VALUES (11, 7, 1);
+INSERT INTO `student_action` VALUES (11, 8, 1);
+INSERT INTO `student_action` VALUES (11, 9, 1);
+INSERT INTO `student_action` VALUES (11, 10, 1);
+INSERT INTO `student_action` VALUES (11, 11, 1);
+INSERT INTO `student_action` VALUES (11, 12, 1);
+INSERT INTO `student_action` VALUES (11, 13, 1);
+INSERT INTO `student_action` VALUES (11, 14, 1);
+INSERT INTO `student_action` VALUES (11, 15, 1);
+INSERT INTO `student_action` VALUES (11, 16, 1);
+INSERT INTO `student_action` VALUES (11, 17, 1);
+INSERT INTO `student_action` VALUES (11, 18, 1);
+INSERT INTO `student_action` VALUES (11, 19, 1);
+INSERT INTO `student_action` VALUES (12, 1, 1);
+INSERT INTO `student_action` VALUES (12, 2, 1);
+INSERT INTO `student_action` VALUES (12, 3, 1);
+INSERT INTO `student_action` VALUES (12, 4, 1);
+INSERT INTO `student_action` VALUES (12, 5, 1);
+INSERT INTO `student_action` VALUES (12, 6, 1);
+INSERT INTO `student_action` VALUES (12, 7, 1);
+INSERT INTO `student_action` VALUES (12, 8, 1);
+INSERT INTO `student_action` VALUES (12, 9, 1);
+INSERT INTO `student_action` VALUES (12, 10, 1);
+INSERT INTO `student_action` VALUES (12, 11, 1);
+INSERT INTO `student_action` VALUES (12, 12, 1);
+INSERT INTO `student_action` VALUES (12, 13, 1);
+INSERT INTO `student_action` VALUES (12, 14, 1);
+INSERT INTO `student_action` VALUES (12, 15, 1);
+INSERT INTO `student_action` VALUES (12, 16, 1);
+INSERT INTO `student_action` VALUES (12, 17, 1);
+INSERT INTO `student_action` VALUES (12, 18, 1);
+INSERT INTO `student_action` VALUES (12, 19, 1);
+INSERT INTO `student_action` VALUES (13, 1, 3);
+INSERT INTO `student_action` VALUES (13, 2, 3);
+INSERT INTO `student_action` VALUES (13, 3, 3);
+INSERT INTO `student_action` VALUES (13, 4, 3);
+INSERT INTO `student_action` VALUES (13, 5, 3);
+INSERT INTO `student_action` VALUES (13, 6, 3);
+INSERT INTO `student_action` VALUES (13, 7, 3);
+INSERT INTO `student_action` VALUES (13, 8, 3);
+INSERT INTO `student_action` VALUES (13, 9, 3);
+INSERT INTO `student_action` VALUES (13, 10, 3);
+INSERT INTO `student_action` VALUES (13, 11, 1);
+INSERT INTO `student_action` VALUES (13, 12, 1);
+INSERT INTO `student_action` VALUES (13, 13, 1);
+INSERT INTO `student_action` VALUES (13, 14, 1);
+INSERT INTO `student_action` VALUES (13, 15, 1);
+INSERT INTO `student_action` VALUES (13, 16, 1);
+INSERT INTO `student_action` VALUES (13, 17, 1);
+INSERT INTO `student_action` VALUES (13, 18, 1);
+INSERT INTO `student_action` VALUES (13, 19, 1);
 
 SET FOREIGN_KEY_CHECKS = 1;

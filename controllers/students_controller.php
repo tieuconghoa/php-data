@@ -7,6 +7,7 @@ require_once('logic/action_logic.php');
 require_once('logic/student_logic.php');
 require_once('logic/capacity_logic.php');
 require_once('logic/class_logic.php');
+require_once('logic/capacity_component_logic.php');
 
 class StudentsController extends BaseController
 {
@@ -29,9 +30,11 @@ class StudentsController extends BaseController
         $actionLogic = new ActionLogic();
         $studentLogic = new StudentLogic();
         $capacityLogic = new CapacityLogic();
+        $capacityComponentLogic = new CapacityComponentLogic();
         $classLogic = new ClassLogic();
         $actions = $actionLogic->getAllAction();
         $capacities = $capacityLogic->getAlCapacity();
+        $capacityComponents = $capacityComponentLogic->getAllCapacityComponent();
         $studentLast = $studentLogic->getLastStudent();
         $classes = $classLogic->getAllClass();
 
@@ -42,7 +45,8 @@ class StudentsController extends BaseController
             "action" => $actions,
             "capacities" => $capacities,
             "student" => $studentLast,
-            "classes" => $classes
+            "classes" => $classes,
+            "capacityComponents" => $capacityComponents
         );
 
 

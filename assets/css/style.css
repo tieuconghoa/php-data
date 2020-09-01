@@ -147,8 +147,12 @@ select:active {
     color: white;
 }
 
-.action-value {
+.capacity-component {
     margin-left: 30px;
+}
+
+.action-value {
+    margin-left: 60px;
 }
 
 .info-student,
